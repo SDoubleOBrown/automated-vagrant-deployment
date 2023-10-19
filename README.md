@@ -39,6 +39,94 @@ You only need to run one of the script which is the vagrant.sh once that runs it
 
 Step 6: wait until everything runs till the end
 
+Step 7: login to the master 
+
+the command can only work when you are in the exact same directory where the command.sh, vagrant.sh and vagrantfile is present:
+
+`$ vagrant ssh master` 
+
+once the script is done running login to the master and there are 3 things you need to check to be present
+
+    1) altschool user - 
+
+    `$ sudo su - altschool`
+
+    2) running process - a file named running_processes is to be present in the home directory:
+
+    `$ ls -al` 
+
+    3) altschool key - a file names altschool key is also needed to be present in the home directory and should contain the public key of the altschool user:
+
+    `$ ls -al`
+
+at this point if you can't find any of this present then you should go back to your bash script and run the command.sh file seperately:
+
+`$ ./command.sh`
+
+once this runs come back to step 7 and check if all the important things are present
+
+Step 8: login to the slave
+
+the command can only work when you are in the exact same directory where the command.sh, vagrant.sh and vagrantfile is present:
+
+if you are still in the master machine you will need to exit:
+
+`$ exit`
+
+login to slave:
+
+`$ vagrant ssh slave`
+
+now that you are in slave machine there are 3 things you will need to check for to be present:
+
+    1) altschool user ssh-key - there should be an ssh-key ending with altschool@master in the output of:
+
+    `$ cat ~/.ssh/authorized_keys`
+
+    2) vagrant user ssh-key - there should also be an ssh-key ending with root@master in the output of this command:
+
+    `$ cat ~/.ssh/authorized_keys`
+
+    3) mnt file - there should be a file named mnt in the home directory of the slave this file should have a sub directory:
+
+    `$ ls -al`
+
+
+if everything that is being stated here is present then move on to step 9
+
+Step 9: making sure LAMP stack is present
+
+we need to make sure the whole lamp stack was installed so you can do that by running:
+
+    1) APACHE: there are different ways to check if apache is present use any that suits you:
+
+    - your ip address: you can just take your ip address (192.168.20.10; 192.168.20.11) and paste it in your browser
+
+    - `$ systemctl status apache2`
+
+    - `$ apache2 --version`
+
+
+    2) PHP: you can run the command below to be sure php is installed
+    - `$ php --version`
+    
+    3)Access the PHP File:
+
+      You can access the PHP file through a web browser. Open a web browser and navigate to:
+      For Master Node: http://192.168.20.10/phpinfo.php
+      For Slave Node: http://192.168.20.11/phpinfo.php
+    This should display detailed information about the PHP configuration.
+    
+
+    4) MYSQL: you can run the command below to check if mysql is installed
+
+    - `$ systemctl status mysql`
+
+    you should see a running status
+    
+
+if all these are present then the scripts ran succesfully. congratulations
+
 ## Script Component
 ### Slave Node Configuration
   - The hostname is set to 'Slave' with an Ubuntu20.04LTS operating system
