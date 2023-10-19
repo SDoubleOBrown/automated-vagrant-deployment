@@ -89,3 +89,23 @@ Step 6: wait until everything runs till the end
 ### Configure directory index
   - Replaces the existing list of default index files with a new list.
   - Ensures that when a directory is requested, Apache will first look for index.php before falling back to the other files in the list
+### Creating a PHP info page
+  - Creates a new PHP file (index.php) in the default web directory (/var/www/html)
+  - Will display PHP information when accessed through a web browser
+### Restart Apache
+  - Restarts Apache, which allows any recent configuration changes to take effect without completely stopping and starting the service
+### Setting MySQL root password
+  - Uses debconf-set-selections to pre-configure MySQL server with a root password
+### Securing MySQL installation
+  - Automates the process of securing the MySQL installation
+  - Sets password, removes unnecessary accounts and applies best practices
+### Install and configure Nginx as a load balancer
+  -  Installs the Nginx web server
+### Create a custom Nginx configuration file for load balancing
+  - Creates a custom Nginx configuration file for load balancing
+  - Defines an upstream block called backend with two server nodes
+  - Sets up a server block that listens on port 80
+  - Requests to this server block will be proxied to the backend
+### Enable the new configuration and restart Nginx
+  - Creates a symbolic link from the load_balancer.conf file in the sites-available directory to the sites-enabled directory
+  - Restarts the Nginx service, which is necessary for any configuration changes to take effect
