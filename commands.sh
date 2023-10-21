@@ -72,15 +72,15 @@ for NODE in "master" "slave"; do
         sudo systemctl reload apache2
 
         # Install and configure Apache, MySQL, PHP
-        sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password alt'
-        sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password alt'
+        sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password altschool001'
+        sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password altschool001'
 
         # Securing MySQL installation
         echo "Securing MySQL installation..."
         sudo mysql_secure_installation <<EOF2
         y
-        alt
-        alt
+        altschool001
+        altschool001
         y
         y
         y
